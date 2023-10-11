@@ -1,0 +1,70 @@
+<!--PWEB KALKULATOR SEDERHANA-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Simple Calculator</title>
+    </head>
+    <body>
+        <h1> Simple Calculator</h1>
+        <form name="calculator">
+            <table style="background-color: "class="tabel">
+                <caption>Calculator</caption>
+                <tr>
+                    <td>Number 1</td><td>:</td><td><input type="number" name="number1"></td>
+                </tr>
+                <tr>
+                    <td>Number 2</td><td>:</td><td><input type="number" name="number2"></td>
+                </tr>
+                <tr>
+                    <td>Result</td><td>:</td><td><input type="number" name="result"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <input class="button" type="button" onclick="addition()" value="  +  ">
+                        <input class="button" type="button" onclick="subtraction()" value="  -  ">
+                        <input class="button" type="button" onclick="multiplication()" value="  *  ">
+                        <input class="button" type="button" onclick="division()" value="  /  ">
+                        <input class="button" type="button" onclick="clearFields()" value="Clear">
+                    </td>
+                </tr>
+            </table>
+         </form>
+             
+    </body>
+</html>
+        <script type="text/javascript">
+            function addition(){
+                const number1=parseFloat(document.calculator.number1.value);
+                const number2=parseFloat(document.calculator.number2.value);
+                const result= number1+number2;
+                document.calculator.result.value=result;
+                }
+            function subtraction(){
+                const number1=parseFloat(document.calculator.number1.value);
+                const number2=parseFloat(document.calculator.number2.value);
+                const result= number1-number2;
+                document.calculator.result.value=result;
+                }
+            function multiplication(){
+                const number1=parseFloat(document.calculator.number1.value);
+                const number2=parseFloat(document.calculator.number2.value);
+                const result= number1*number2;
+                document.calculator.result.value=result;
+                }
+            function division(){
+                const number1=parseFloat(document.calculator.number1.value);
+                const number2=parseFloat(document.calculator.number2.value);
+                const result= number1/number2;
+                document.calculator.result.value=result;
+                }
+            function clearFields() {
+                document.calculator.number1.value = '';
+                document.calculator.number2.value = '';
+                document.calculator.result.value = '';
+                }
+        </script>
+            
+        </form>
+
+    </body>
+</html>

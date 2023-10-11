@@ -1,0 +1,58 @@
+<!--PWEB KALKULATOR SEDERHANA-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+</head>
+<body>
+  <h1>Calculator</h1>
+  
+  <input type="text" id="display" disabled>
+  <br>
+  <div id="calculator">
+    <button onclick="Display('0')">0</button>
+    <button onclick="Display('1')">1</button>
+    <button onclick="Display('2')">2</button>
+    <button onclick="Display('3')">3</button>
+    <button onclick="Display('4')">4</button>
+    <button onclick="Display('5')">5</button>
+    <button onclick="Display('6')">6</button>
+    <button onclick="Display('7')">7</button>
+    <button onclick="Display('8')">8</button>
+    <button onclick="Display('9')">9</button>
+    <br>
+    <button onclick="Display('+')">+</button>
+    <button onclick="Display('-')">-</button>
+    <button onclick="Display('*')">*</button>
+    <button onclick="Display('/')">/</button>
+    <button onclick="calculateResult()">=</button>
+    <br>
+    <button onclick="clearField()">C</button>
+    <button onclick="deleteCharacter()">Del</button>
+  </div>
+  
+  <script>
+    function clearField() {
+      document.getElementById('display').value = '';
+    }
+
+    function Display(value) {
+      document.getElementById('display').value += value;
+    }
+
+    function deleteCharacter() {
+      const currentValue = document.getElementById('display').value;
+      document.getElementById('display').value = currentValue.slice(0, -1);
+    }
+
+    function calculateResult() {
+      try {
+        const result = eval(document.getElementById('display').value);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
