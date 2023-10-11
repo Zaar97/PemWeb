@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Set background image */
+        body {
+            background-image: url('download.jpeg'); /* Replace 'download.jpeg' with your image file's path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Change text color to white */
+        h1.text-center {
+            color: #fff;
+        }
+
+        /* Add effect when hovering over movie posters */
+        .card {
+            background-color: rgba(0, 0, 0, 0.7); /* Background color black with some transparency */
+            color: #fff; /* Text color white */
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
+
+        /* Add a hover effect to the IMDb button */
+        .btn-primary {
+            background-color: #4CAF50; /* Change to your preferred green color */
+            border-color: #4CAF50; /* Set button border color to match the background */
+        }
+
+        /* Button hover effect */
+        .btn-primary:hover {
+            background-color: #45a049; /* Change to your preferred hover color */
+        }
+
+        /* Dark transparent input background and white text */
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.7); /* Background color black with some transparency */
+            color: #fff; /* Text color white */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center">Movie Search</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search for a movie">
+            <div class="input-group-append">
+                <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+            </div>
+        </div>
+        <div id="results" class="row">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchButton').addEventListener('click', searchMovies);
+        document.getElementById('searchInput').addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                searchMovies();
+            }
+        });
+
+        function searchMovies() {
+            const searchInput = document.getElementById('searchInput').value;
+
+            fetch(`https://www.omdbapi.com/?s=${searchInput}&apikey=ad001af8`)
+                .then(response => response.json())
+                .then(data => {
+                    const results = document.getElementById('results');
+                    results.innerHTML = '';
+
+                    if (data.Search) {
+                        data.Search.forEach(movie => {
+                            const movieCard = `
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${movie.Title}</h5>
+                                            <p class="card-text">${movie.Year}</p>
+                                            <a href="https://www.imdb.com/title/${movie.imdbID}" class="btn btn-primary">IMDb</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            results.innerHTML += movieCard;
+                        });
+                    } else {
+                        results.innerHTML = '<p class="text-danger">No results found.</p>';
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+    </script>
+</body>
+</html>
